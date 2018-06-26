@@ -12,7 +12,33 @@
 		D3DDAF0320E289EF00D5F230 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3DDAF0120E289EF00D5F230 /* Main.storyboard */; };
 		D3DDAF0520E289F100D5F230 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3DDAF0420E289F100D5F230 /* Assets.xcassets */; };
 		D3DDAF0820E289F100D5F230 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3DDAF0620E289F100D5F230 /* LaunchScreen.storyboard */; };
+		D3DF404920E28B460055C9F2 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DF404820E28B460055C9F2 /* KeyboardViewController.swift */; };
+		D3DF404D20E28B460055C9F2 /* HapticKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3DF404620E28B460055C9F2 /* HapticKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D3DF404B20E28B460055C9F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3DDAEF220E289EF00D5F230 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3DF404520E28B460055C9F2;
+			remoteInfo = HapticKeyboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D3DF405120E28B460055C9F2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D3DF404D20E28B460055C9F2 /* HapticKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D3DDAEFA20E289EF00D5F230 /* Custom Keyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Custom Keyboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,10 +48,20 @@
 		D3DDAF0420E289F100D5F230 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3DDAF0720E289F100D5F230 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3DDAF0920E289F100D5F230 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3DF404620E28B460055C9F2 /* HapticKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HapticKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3DF404820E28B460055C9F2 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		D3DF404A20E28B460055C9F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D3DDAEF720E289EF00D5F230 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3DF404320E28B460055C9F2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				D3DDAEFC20E289EF00D5F230 /* Custom Keyboard */,
+				D3DF404720E28B460055C9F2 /* HapticKeyboard */,
 				D3DDAEFB20E289EF00D5F230 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				D3DDAEFA20E289EF00D5F230 /* Custom Keyboard.app */,
+				D3DF404620E28B460055C9F2 /* HapticKeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +102,15 @@
 			path = "Custom Keyboard";
 			sourceTree = "<group>";
 		};
+		D3DF404720E28B460055C9F2 /* HapticKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D3DF404820E28B460055C9F2 /* KeyboardViewController.swift */,
+				D3DF404A20E28B460055C9F2 /* Info.plist */,
+			);
+			path = HapticKeyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,15 +121,34 @@
 				D3DDAEF620E289EF00D5F230 /* Sources */,
 				D3DDAEF720E289EF00D5F230 /* Frameworks */,
 				D3DDAEF820E289EF00D5F230 /* Resources */,
+				D3DF405120E28B460055C9F2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D3DF404C20E28B460055C9F2 /* PBXTargetDependency */,
 			);
 			name = "Custom Keyboard";
 			productName = "Custom Keyboard";
 			productReference = D3DDAEFA20E289EF00D5F230 /* Custom Keyboard.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D3DF404520E28B460055C9F2 /* HapticKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3DF405020E28B460055C9F2 /* Build configuration list for PBXNativeTarget "HapticKeyboard" */;
+			buildPhases = (
+				D3DF404220E28B460055C9F2 /* Sources */,
+				D3DF404320E28B460055C9F2 /* Frameworks */,
+				D3DF404420E28B460055C9F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HapticKeyboard;
+			productName = HapticKeyboard;
+			productReference = D3DF404620E28B460055C9F2 /* HapticKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -95,6 +161,9 @@
 				ORGANIZATIONNAME = "Alberto Xamin";
 				TargetAttributes = {
 					D3DDAEF920E289EF00D5F230 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					D3DF404520E28B460055C9F2 = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
@@ -113,6 +182,7 @@
 			projectRoot = "";
 			targets = (
 				D3DDAEF920E289EF00D5F230 /* Custom Keyboard */,
+				D3DF404520E28B460055C9F2 /* HapticKeyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +198,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3DF404420E28B460055C9F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -140,7 +217,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3DF404220E28B460055C9F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3DF404920E28B460055C9F2 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D3DF404C20E28B460055C9F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3DF404520E28B460055C9F2 /* HapticKeyboard */;
+			targetProxy = D3DF404B20E28B460055C9F2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D3DDAF0120E289EF00D5F230 /* Main.storyboard */ = {
@@ -279,6 +372,7 @@
 		D3DDAF0D20E289F100D5F230 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EN4JZ8X5HN;
@@ -297,6 +391,7 @@
 		D3DDAF0E20E289F100D5F230 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EN4JZ8X5HN;
@@ -307,6 +402,46 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "it.xamin.Custom-Keyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D3DF404E20E28B460055C9F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EN4JZ8X5HN;
+				INFOPLIST_FILE = HapticKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "it.xamin.Custom-Keyboard.HapticKeyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D3DF404F20E28B460055C9F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EN4JZ8X5HN;
+				INFOPLIST_FILE = HapticKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "it.xamin.Custom-Keyboard.HapticKeyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -329,6 +464,15 @@
 			buildConfigurations = (
 				D3DDAF0D20E289F100D5F230 /* Debug */,
 				D3DDAF0E20E289F100D5F230 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3DF405020E28B460055C9F2 /* Build configuration list for PBXNativeTarget "HapticKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3DF404E20E28B460055C9F2 /* Debug */,
+				D3DF404F20E28B460055C9F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
