@@ -21,9 +21,17 @@ class KeyboardViewController: UIInputViewController {
         sender.backgroundColor = UIColor.white
     }
     
+    func colorForKey(button: UIButton) -> UIColor {
+        if "↑⇡🔢🔣🔤⌫🌐🎤␣➥".contains(button.titleLabel!.text!){
+            return UIColor(red: 172/255.0, green: 177/255.0, blue: 188/255.0, alpha: 1)
+        }else{
+            return UIColor.white
+        }
+    }
+    
     @objc func keyPressed(_ sender: UIButton){
         timer.invalidate()
-        sender.backgroundColor = UIColor.white
+        sender.backgroundColor = colorForKey(button: sender)
         lightImpactFeedbackGenerator.impactOccurred()
         key = sender
         type()
@@ -39,6 +47,18 @@ class KeyboardViewController: UIInputViewController {
             
             break
         case "🔢":
+            for v in view.subviews {
+                v.removeFromSuperview()
+            }
+            buildKeyboard(letters: "1234567890 -/:;()$&@\" 🔣.,?!'⌫ 🔤🌐🎤␣➥")
+            break
+        case "🔤":
+            for v in view.subviews {
+                v.removeFromSuperview()
+            }
+            buildKeyboard(letters: "qwertyuiop asdfghjkl ↑zxcvbnm⌫ 🔢🌐🎤␣➥")
+            break
+        case "🎤":
             break
         case "⌫":
             textDocumentProxy.deleteBackward()
@@ -85,15 +105,16 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidLoad()
         
         lightImpactFeedbackGenerator.prepare()
-        
-        let firstRow = "qwertyuiop asdfghjkl ↑zxcvbnm⌫ 🔢🌐🎤␣➥"
-        
+        buildKeyboard(letters: "qwertyuiop asdfghjkl ↑zxcvbnm⌫ 🔢🌐🎤␣➥")
+    }
+    
+    func buildKeyboard(letters: String) {
         var x : CGFloat = 0
         var y : CGFloat = 10
         var rowIndex = 0
-        for row in firstRow.split(separator: " ") {
-            let letterSize = (UIScreen.main.bounds.size.width - 3 - ((rowIndex == 1) ? 36 : 0)) / CGFloat(row.count)
-            if rowIndex == 1{
+        for row in letters.split(separator: " ") {
+            let letterSize = (UIScreen.main.bounds.size.width - 3 - ((rowIndex == 1 && row == "asdfghjkl") ? 36 : 0)) / CGFloat(row.count)
+            if rowIndex == 1 && row == "asdfghjkl"{
                 x = 18
             }
             for char in row {
@@ -104,7 +125,7 @@ class KeyboardViewController: UIInputViewController {
                 keyBtn.addTarget(self, action:#selector(keyDown), for: .touchDown)
                 keyBtn.tintColor = UIColor.black
                 keyBtn.titleLabel?.font = UIFont(name: "SF Pro", size: 25)
-                keyBtn.backgroundColor = UIColor.white
+                keyBtn.backgroundColor = colorForKey(button: keyBtn)
                 keyBtn.layer.cornerRadius = 5
                 keyBtn.layer.shadowColor = UIColor.black.cgColor
                 keyBtn.layer.shadowOpacity = 0.1
@@ -117,7 +138,6 @@ class KeyboardViewController: UIInputViewController {
                     if char == "➥" {
                         w = 92
                         keyBtn.setTitle("return", for: [])
-                        keyBtn.backgroundColor = UIColor.blue
                     }else if char == "␣"{
                         w = 154
                     } else {
