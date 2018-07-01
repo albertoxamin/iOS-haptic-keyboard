@@ -42,20 +42,18 @@ class KeyboardViewController: UIInputViewController {
         let text : String = key!.titleLabel!.text!
         switch text {
         case "␣":
+            attemptToReplaceCurrentWord()
             textDocumentProxy.insertText(" ")
         case "return":
             
             break
         case "🔢":
-            for v in view.subviews {
-                v.removeFromSuperview()
-            }
             buildKeyboard(letters: "1234567890 -/:;()$&@\" 🔣.,?!'⌫ 🔤🌐🎤␣➥")
             break
+        case "🔣":
+            buildKeyboard(letters: "[]{}#%^*+= _\\|~<>$￡￥ 🔢.,?!´⌫ 🔤🌐🎤␣➥")
+            break
         case "🔤":
-            for v in view.subviews {
-                v.removeFromSuperview()
-            }
             buildKeyboard(letters: "qwertyuiop asdfghjkl ↑zxcvbnm⌫ 🔢🌐🎤␣➥")
             break
         case "🎤":
@@ -73,6 +71,10 @@ class KeyboardViewController: UIInputViewController {
         default:
             textDocumentProxy.insertText(text)
         }
+    }
+    
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        buildKeyboard(letters: currentLetters)
     }
     
     func setCaps() {
@@ -100,19 +102,49 @@ class KeyboardViewController: UIInputViewController {
         key = sender
         timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(initalizeRepeat), userInfo: nil, repeats: false)
     }
-    
+
+    var userLexicon: UILexicon?
+    var currentWord: String? {
+        var lastWord: String?
+        // 1
+        if let stringBeforeCursor = textDocumentProxy.documentContextBeforeInput {
+            // 2
+            stringBeforeCursor.enumerateSubstrings(in: stringBeforeCursor.startIndex...,
+                    options: .byWords)
+            { word, _, _, _ in
+                // 3
+                if let word = word {
+                    lastWord = word
+                }
+            }
+        }
+        return lastWord
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lightImpactFeedbackGenerator.prepare()
         buildKeyboard(letters: "qwertyuiop asdfghjkl ↑zxcvbnm⌫ 🔢🌐🎤␣➥")
+//        view.heightAnchor.constraint(equalToConstant: 300).isActive = true;
+//        view.superview?.setNeedsLayout()
+//        view.setNeedsLayout()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+        requestSupplementaryLexicon { lexicon in
+            self.userLexicon = lexicon
+        }
     }
     
+    var currentLetters = ""
     func buildKeyboard(letters: String) {
+        for v in view.subviews {
+            v.removeFromSuperview()
+        }
+        currentLetters = letters
         var x : CGFloat = 0
         var y : CGFloat = 10
         var rowIndex = 0
-        for row in letters.split(separator: " ") {
+        let rows = letters.split(separator: " ")
+        for row in rows {
             let letterSize = (UIScreen.main.bounds.size.width - 3 - ((rowIndex == 1 && row == "asdfghjkl") ? 36 : 0)) / CGFloat(row.count)
             if rowIndex == 1 && row == "asdfghjkl"{
                 x = 18
@@ -170,4 +202,29 @@ class KeyboardViewController: UIInputViewController {
         }
     }
 
+}
+
+private extension KeyboardViewController {
+    func attemptToReplaceCurrentWord() {
+        // 1
+        guard let entries = userLexicon?.entries,
+              let currentWord = currentWord?.lowercased() else {
+            return
+        }
+
+        // 2
+        let replacementEntries = entries.filter {
+            $0.userInput.lowercased() == currentWord
+        }
+
+        if let replacement = replacementEntries.first {
+            // 3
+            for _ in 0..<currentWord.count {
+                textDocumentProxy.deleteBackward()
+            }
+
+            // 4
+            textDocumentProxy.insertText(replacement.documentText)
+        }
+    }
 }
